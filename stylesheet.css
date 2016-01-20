@@ -1,0 +1,24 @@
+body{
+    background-color: cadetblue;
+    align-content: center;
+    align-self: center;
+    display: block;
+}
+
+h1{
+    text-align: center;
+}
+
+h2{
+    text-align: left;
+}
+
+header{
+    background-color: darkblue;
+}
+
+header nav ul li{
+    align-content: center;
+    align-items: center;
+    display: inline;
+}
