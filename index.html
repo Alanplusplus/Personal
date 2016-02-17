@@ -9,7 +9,7 @@
 <body>
 <h1>Clock</h1>
 <div align="center">
-    <canvas id="clockCanvas" width="200" height="200" style="border: 0;margin: auto;"></canvas>
+    <canvas id="clockCanvas" width="500" height="500" style="border: 0;margin: auto;"></canvas>
 </div>
 
 
@@ -17,26 +17,26 @@
 
     var canvas = document.getElementById("clockCanvas");
     var ctx = canvas.getContext("2d");
-    ctx.translate(100, 100);
+    ctx.translate(250, 250);
 
     drawClock();
     setInterval(drawClock, 1000);
     function drawClock() {
         ctx.beginPath();
-        ctx.arc(0, 0, 90, 0, 2 * Math.PI);
+        ctx.arc(0, 0, 200, 0, 2 * Math.PI);
         ctx.fillStyle = "white";
         ctx.fill();
         ctx.closePath();
 
         ctx.beginPath();
-        ctx.arc(0, 0, 5, 0, 2 * Math.PI);
+        ctx.arc(0, 0, 15, 0, 2 * Math.PI);
         ctx.fillStyle = "black";
         ctx.fill();
         ctx.closePath();
 
-        drawNumbers(ctx, 90);
+        drawNumbers(ctx, 200);
 
-        drawHands(ctx, 90);
+        drawHands(ctx, 200);
     }
 
 
@@ -45,15 +45,16 @@
         var angle;
         ctx.fillStyle = "black";
         ctx.baseline = "middle";
+        ctx.font = radius * 0.15 + "px arial"
         ctx.textAlign = "center";
         for (num = 1; num < 13; num++) {
             angle = num * Math.PI / 6;
             ctx.rotate(angle);
-            ctx.translate(0, -radius * 0.85);
+            ctx.translate(0, -radius * 0.8);
 //            ctx.rotate(-angle);
             ctx.fillText(num.toString(), 0, 0);
 //            ctx.rotate(angle);
-            ctx.translate(0, radius * 0.85);
+            ctx.translate(0, radius * 0.8);
             ctx.rotate(-angle);
         }
     }
@@ -66,9 +67,9 @@
         var second = now.getSeconds();
         drawHand(ctx, "black", hour * Math.PI / 6, radius * 0.5, 6);
 
-        drawHand(ctx, "green", minute * Math.PI / 30, radius * 0.65, 4);
+        drawHand(ctx, "green", minute * Math.PI / 30, radius * 0.62, 4);
 
-        drawHand(ctx, "red", second * Math.PI / 30, radius * 0.8, 2);
+        drawHand(ctx, "red", second * Math.PI / 30, radius * 0.72, 2);
 
     }
 
