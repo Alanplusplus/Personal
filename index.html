@@ -7,24 +7,81 @@
     <title>Welcome</title>
 </head>
 <body>
-<div style="max-width: none;">
-    <header>
-         <h1>This is a header</h1>
-        <nav>
-        <ul >
-            <li><a href="#">One</a></li>
-            <li><a href="#">Two</a></li>
-        </ul>
-    </nav>
-    </header>
-
-
+<h1>Clock</h1>
+<div align="center">
+    <canvas id="clockCanvas" width="200" height="200" style="border: 0;margin: auto;"></canvas>
 </div>
 
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
-    <polygon points="100,10 40,180 190,60 10,60 160,180"
-             style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;"/>
-</svg>
 
+<script>
+
+    var canvas = document.getElementById("clockCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.translate(100, 100);
+
+    drawClock();
+    setInterval(drawClock, 1000);
+    function drawClock() {
+        ctx.beginPath();
+        ctx.arc(0, 0, 90, 0, 2 * Math.PI);
+        ctx.fillStyle = "white";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        ctx.closePath();
+
+        drawNumbers(ctx, 90);
+
+        drawHands(ctx, 90);
+    }
+
+
+    function drawNumbers(ctx, radius) {
+        var num;
+        var angle;
+        ctx.fillStyle = "black";
+        ctx.baseline = "middle";
+        ctx.textAlign = "center";
+        for (num = 1; num < 13; num++) {
+            angle = num * Math.PI / 6;
+            ctx.rotate(angle);
+            ctx.translate(0, -radius * 0.85);
+//            ctx.rotate(-angle);
+            ctx.fillText(num.toString(), 0, 0);
+//            ctx.rotate(angle);
+            ctx.translate(0, radius * 0.85);
+            ctx.rotate(-angle);
+        }
+    }
+
+    function drawHands(ctx, radius) {
+
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        drawHand(ctx, "black", hour * Math.PI / 6, radius * 0.5, 6);
+
+        drawHand(ctx, "green", minute * Math.PI / 30, radius * 0.65, 4);
+
+        drawHand(ctx, "red", second * Math.PI / 30, radius * 0.8, 2);
+
+    }
+
+    function drawHand(ctx, color, angle, length, lineWidth) {
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.rotate(angle);
+        ctx.lineWidth = lineWidth;
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, -length);
+        ctx.rotate(-angle);
+        ctx.stroke();
+    }
+</script>
 </body>
 </html>
