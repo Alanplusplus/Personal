@@ -12,8 +12,27 @@
     <canvas id="clockCanvas" width="500" height="500" style="border: 0;margin: auto;"></canvas>
 </div>
 
+<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+
+<script src="//unslider.com/unslider.js"></script>
+
+<div class="banner">
+    <ul>
+        <li>This is a slide</li>
+        <li>This is second slide</li>
+        <li>This is a final slide</li>
+    </ul>
+</div>
 
 <script>
+
+    function getData() {
+        $.ajax({
+            url: "a.html"
+        }).done(function (data) {
+            alert(data);
+        });
+    }
 
     var canvas = document.getElementById("clockCanvas");
     var ctx = canvas.getContext("2d");

@@ -22,3 +22,7 @@ header nav ul li{
     align-items: center;
     display: inline;
 }
+
+.banner { position: relative; overflow: auto; }
+    .banner li { list-style: none; }
+        .banner ul li { float: left; }
